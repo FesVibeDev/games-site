@@ -73,6 +73,22 @@
             color: white;
         }
 
+        .nav-button {
+            background: rgba(255, 255, 255, 0.3);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: all 0.3s ease;
+            margin-bottom: 20px;
+        }
+
+        .nav-button:hover {
+            background: rgba(255, 255, 255, 0.5);
+        }
+
         .games-section {
             display: none;
             animation: fadeIn 0.5s ease-in;
@@ -89,6 +105,53 @@
             animation: slideUp 0.6s ease-in;
         }
 
+        /* ПАПКА (ПОДБОРКА ИГРЫ) */
+        .folder-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .folder-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 35px rgba(0,0,0,0.3);
+        }
+
+        .folder-card img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            background: #f0f0f0;
+        }
+
+        .folder-card h3 {
+            padding: 15px 15px 5px;
+            color: #333;
+            font-size: 1.3em;
+        }
+
+        .folder-card p {
+            padding: 0 15px 15px;
+            color: #666;
+            font-size: 0.95em;
+            flex-grow: 1;
+        }
+
+        .folder-count {
+            padding: 10px 15px;
+            background: #f0f0f0;
+            border-top: 1px solid #eee;
+            color: #667eea;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        /* КАРТОЧКА ИГРЫ */
         .game-card {
             background: white;
             border-radius: 15px;
@@ -215,34 +278,88 @@
         <!-- ЗАГОЛОВОК -->
         <header>
             <h1>🎮 МОИ ИГРЫ</h1>
-            <p>Играй онлайн или скачай себе</p>
+            <p>Выбери папку или отфильтруй по жанру</p>
         </header>
 
         <!-- ВКЛАДКИ (КАТЕГОРИИ) -->
         <div class="tabs">
-            <button class="tab-btn active" onclick="showCategory('all')">Все игры</button>
+            <button class="tab-btn active" onclick="showCategory('folders')">📁 Папки</button>
+            <button class="tab-btn" onclick="showCategory('all')">Все игры</button>
             <button class="tab-btn" onclick="showCategory('shooter')">Шутеры</button>
             <button class="tab-btn" onclick="showCategory('action')">Экшены</button>
             <button class="tab-btn" onclick="showCategory('rpg')">РПГ</button>
         </div>
 
+        <!-- РАЗДЕЛ: ПАПКИ -->
+        <div id="folders" class="games-section active">
+            <div class="games-grid">
+                
+                <!-- ПАПКА 1 -->
+                <div class="folder-card" onclick="openFolder('counter-strike')">
+                    <img src="images/counter-strike.jpg" alt="Counter-Strike">
+                    <h3>📦 Counter-Strike</h3>
+                    <p>Серия легендарных тактических шутеров</p>
+                    <div class="folder-count">2 игры</div>
+                </div>
+
+                <!-- ПАПКА 2 -->
+                <div class="folder-card" onclick="openFolder('gta')">
+                    <img src="images/gta.jpg" alt="GTA">
+                    <h3>📦 GTA</h3>
+                    <p>Серия открытого мира от Rockstar</p>
+                    <div class="folder-count">1 игра</div>
+                </div>
+
+                <!-- ПАПКА 3 -->
+                <div class="folder-card" onclick="openFolder('minecraft')">
+                    <img src="images/minecraft.jpg" alt="Minecraft">
+                    <h3>📦 Minecraft</h3>
+                    <p>Королева песочниц и строительства</p>
+                    <div class="folder-count">1 игра</div>
+                </div>
+
+                <!-- ДОБАВЛЯЙ НОВЫЕ ПАПКИ СЮДА -->
+
+            </div>
+        </div>
+
+        <!-- РАЗДЕЛ: ПРОСМОТР ПАПКИ (СКРЫТО ПО УМОЛЧАНИЮ) -->
+        <div id="folder-view" class="games-section">
+            <button class="nav-button" onclick="backToFolders()">← Назад к папкам</button>
+            <div id="folder-title" style="color: white; font-size: 1.5em; margin-bottom: 20px;"></div>
+            <div class="games-grid" id="folder-games">
+                <!-- ИГРЫ ПАПКИ ОТОБРАЖАЮТСЯ ЗДЕСЬ -->
+            </div>
+        </div>
+
         <!-- КАТЕГОРИЯ: ВСЕ ИГРЫ -->
-        <div id="all" class="games-section active">
+        <div id="all" class="games-section">
             <div class="games-grid">
                 
                 <!-- ИГРА 1 -->
-                <div class="game-card">
-                    <img src="images/csgemini.jpg" alt="Counter">
+                <div class="game-card" data-genre="shooter" data-folder="counter-strike">
+                    <img src="images/csgemini.jpg" alt="CSGEMINI">
                     <h3>CSGEMINI</h3>
-                    <p>Классический шутер с быстрым геймплеем. Уничтожай врагов и выживай!</p>
+                    <p>Тактический шутер с быстрым геймплеем. Уничтожай врагов и выживай!</p>
                     <div class="button-group">
                         <a href="games/CSGEMINI.html" class="btn btn-play">▶ Играть</a>
-                        <a href="downloads/counter.zip" download class="btn btn-download">⬇ Скачать</a>
+                        <a href="downloads/csgemini.zip" download class="btn btn-download">⬇ Скачать</a>
                     </div>
                 </div>
 
                 <!-- ИГРА 2 -->
-                <div class="game-card">
+                <div class="game-card" data-genre="shooter" data-folder="counter-strike">
+                    <img src="images/counter.jpg" alt="Counter">
+                    <h3>Counter</h3>
+                    <p>Классический шутер с быстрым геймплеем. Уничтожай врагов и выживай!</p>
+                    <div class="button-group">
+                        <a href="games/counter.html" class="btn btn-play">▶ Играть</a>
+                        <a href="downloads/counter.zip" download class="btn btn-download">⬇ Скачать</a>
+                    </div>
+                </div>
+
+                <!-- ИГРА 3 -->
+                <div class="game-card" data-genre="action" data-folder="gta">
                     <img src="images/gta.jpg" alt="GTA">
                     <h3>GTA</h3>
                     <p>Экшн в открытом мире. Жми газ и выполняй миссии!</p>
@@ -252,8 +369,8 @@
                     </div>
                 </div>
 
-                <!-- ИГРА 3 -->
-                <div class="game-card">
+                <!-- ИГРА 4 -->
+                <div class="game-card" data-genre="rpg" data-folder="minecraft">
                     <img src="images/minecraft.jpg" alt="Minecraft">
                     <h3>Minecraft</h3>
                     <p>РПГ-приключение. Строй, исследуй и создавай свой мир!</p>
@@ -272,7 +389,17 @@
         <div id="shooter" class="games-section">
             <div class="games-grid">
                 
-                <div class="game-card">
+                <div class="game-card" data-genre="shooter">
+                    <img src="images/csgemini.jpg" alt="CSGEMINI">
+                    <h3>CSGEMINI</h3>
+                    <p>Тактический шутер с быстрым геймплеем. Уничтожай врагов и выживай!</p>
+                    <div class="button-group">
+                        <a href="games/CSGEMINI.html" class="btn btn-play">▶ Играть</a>
+                        <a href="downloads/csgemini.zip" download class="btn btn-download">⬇ Скачать</a>
+                    </div>
+                </div>
+
+                <div class="game-card" data-genre="shooter">
                     <img src="images/counter.jpg" alt="Counter">
                     <h3>Counter</h3>
                     <p>Классический шутер с быстрым геймплеем. Уничтожай врагов и выживай!</p>
@@ -289,7 +416,7 @@
         <div id="action" class="games-section">
             <div class="games-grid">
                 
-                <div class="game-card">
+                <div class="game-card" data-genre="action">
                     <img src="images/gta.jpg" alt="GTA">
                     <h3>GTA</h3>
                     <p>Экшн в открытом мире. Жми газ и выполняй миссии!</p>
@@ -306,7 +433,7 @@
         <div id="rpg" class="games-section">
             <div class="games-grid">
                 
-                <div class="game-card">
+                <div class="game-card" data-genre="rpg">
                     <img src="images/minecraft.jpg" alt="Minecraft">
                     <h3>Minecraft</h3>
                     <p>РПГ-приключение. Строй, исследуй и создавай свой мир!</p>
@@ -345,6 +472,52 @@
                 btn.classList.remove('active');
             });
             event.target.classList.add('active');
+        }
+
+        function openFolder(folderName) {
+            // Получаем все игры этой папки
+            const games = document.querySelectorAll(`.game-card[data-folder="${folderName}"]`);
+            const folderTitle = document.getElementById('folder-title');
+            const folderGames = document.getElementById('folder-games');
+
+            // Очищаем контент
+            folderGames.innerHTML = '';
+
+            // Устанавливаем название папки
+            const folderNames = {
+                'counter-strike': '📦 Counter-Strike',
+                'gta': '📦 GTA',
+                'minecraft': '📦 Minecraft'
+            };
+            folderTitle.textContent = folderNames[folderName] || 'Папка';
+
+            // Добавляем игры в список
+            games.forEach(game => {
+                folderGames.appendChild(game.cloneNode(true));
+            });
+
+            // Скрываем все секции и показываем папку
+            const sections = document.querySelectorAll('.games-section');
+            sections.forEach(section => {
+                section.classList.remove('active');
+            });
+            document.getElementById('folder-view').classList.add('active');
+
+            // Обновляем кнопки вкладок
+            const buttons = document.querySelectorAll('.tab-btn');
+            buttons.forEach(btn => {
+                btn.classList.remove('active');
+            });
+        }
+
+        function backToFolders() {
+            showCategory('folders');
+            // Устанавливаем активной кнопку "Папки"
+            const buttons = document.querySelectorAll('.tab-btn');
+            buttons.forEach(btn => {
+                btn.classList.remove('active');
+            });
+            buttons[0].classList.add('active');
         }
     </script>
 </body>
