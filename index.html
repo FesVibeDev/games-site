@@ -221,6 +221,15 @@
             color: white;
         }
 
+        .btn-mobile {
+    background: #e17055; /* Оранжевый цвет */
+    color: white;
+}
+
+.btn-mobile:hover {
+    background: #d63031;
+}
+        
         .btn-download:hover {
             background: #64398f;
         }
@@ -385,16 +394,25 @@
                     </div>
                 </div>
 
-                <!-- ИГРА 5 -->
-                <div class="game-card" data-genre="BulletHell" data-folder="gold">
-                    <img src="images/belka.jpg" alt="BELKA">
-                    <h3>Belka</h3>
-                    <p>Офисный bullethell беспредел от Gemini Pro</p>
-                    <div class="button-group">
-                        <a href="games/belka.html" class="btn btn-play">▶ Играть</a>
-                        <a href="downloads/belka.zip" download class="btn btn-download">⬇ Скачать</a>
-                    </div>
-                </div>
+              <!-- ИГРА 5 -->
+<div class="game-card" data-genre="BulletHell" data-folder="gold">
+    <img src="images/belka.jpg" alt="BELKA">
+    <h3>Belka</h3>
+    <p>Офисный bullethell беспредел от Gemini Pro</p>
+    
+    <!-- Добавили flex-wrap, чтобы кнопки переносились -->
+    <div class="button-group" style="flex-wrap: wrap;">
+        <a href="games/belka.html" class="btn btn-play">▶ Играть</a>
+        <a href="downloads/belka.zip" download class="btn btn-download">⬇ Скачать</a>
+        
+        <!-- 3-я КНОПКА -->
+        <!-- flex-basis: 100% растягивает кнопку на всю ширину снизу -->
+        <a href="games/belka_mobile.html" class="btn btn-mobile" style="flex-basis: 100%; margin-top: 10px;">
+            📱 Версия для Мобилок
+        </a>
+    </div>
+</div>
+
 
                 <!-- ДОБАВЛЯЙ НОВЫЕ ИГРЫ СЮДА -->
 
